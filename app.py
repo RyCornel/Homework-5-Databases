@@ -22,7 +22,7 @@ def plants_list():
     # TODO: Replace the following line with a database call to retrieve *all*
     # plants from the Mongo database's `plants` collection.
     plants_data = ''
-
+ 
     context = {
         'plants': plants_data,
     }
