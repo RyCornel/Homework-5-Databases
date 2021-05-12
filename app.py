@@ -41,7 +41,7 @@ def create():
         # store them in the object below.
         new_plant = {
             'name': request.form.get('plant_name'),
-            'variety': request.form.get('variety')',
+            'variety': request.form.get('variety'),
             'photo_url': request.form.get('photo'),
             'date_planted': request.form.get('date_planted')
         }
