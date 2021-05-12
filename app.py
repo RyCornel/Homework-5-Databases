@@ -23,11 +23,12 @@ def plants_list():
     # plants from the Mongo database's `plants` collection.
     plants_data = mongo.db.plants.find()
 
+    plants = []
     for plant in plants_data:
-        plant.append(plant)
+        plants.append(plant)
  
     context = {
-        'plants': plants_data,
+        'plants': plants,
     }
     return render_template('plants_list.html', **context)
 
