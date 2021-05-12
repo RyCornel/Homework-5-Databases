@@ -1,3 +1,4 @@
+from re import search
 from flask import Flask, request, redirect, render_template, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -66,7 +67,7 @@ def detail(plant_id):
 
     # TODO: Replace the following line with a database call to retrieve *one*
     # plant from the database, whose id matches the id passed in via the URL.
-    plant_to_show = mongo.db.plants.find_one({'_id':ObjectId(plant_id)})
+    plant_to_show = mongo.db.plants.find_one({'_id' : ObjectId(plant_id)})
 
     # TODO: Use the `find` database operation to find all harvests for the
     # plant's id.
@@ -113,12 +114,24 @@ def edit(plant_id):
         # TODO: Make an `update_one` database call to update the plant with the
         # given id. Make sure to put the updated fields in the `$set` object.
 
+        searchParam = {'_id' : ObjectId(plant_id)}
+
+        changes = {'$set': 
+                    { 
+                        'name' : request.form.get('plant_name'),
+                        'variety' : request.form.get('variety'),
+                        'photo_url' : request.form.get('photo'),
+                        'date_planted' : request.form.get('date_planted')
+                    }
+            }
+
+        mongo.db.plants.update_one()
         
         return redirect(url_for('detail', plant_id=plant_id))
     else:
         # TODO: Make a `find_one` database call to get the plant object with the
         # passed-in _id.
-        plant_to_show = mongo.db.plants.find_one()
+        plant_to_show = mongo.db.plants.find_one({'_id' : ObjectId(plant_id)})
 
         context = {
             'plant': plant_to_show
