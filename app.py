@@ -21,7 +21,10 @@ def plants_list():
 
     # TODO: Replace the following line with a database call to retrieve *all*
     # plants from the Mongo database's `plants` collection.
-    plants_data = ''
+    plants_data = mongo.db.plants.find()
+
+    for plant in plants_data:
+        plant.append(plant)
  
     context = {
         'plants': plants_data,
